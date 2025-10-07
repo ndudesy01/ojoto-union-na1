@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Ojoto Union NA1{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Dashboard</h2>
+            {% if current_user.is_admin %}
+            <a href="{{ url_for('post_announcement') }}" class="btn btn-primary">Post New Announcement</a>
+            {% endif %}
+        </div>
+        
+        <!-- Welcome Card -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Welcome, {{ current_user.username }}!</h5>
+                <p class="card-text">
+                    {% if current_user.is_admin %}
+                    You have administrator privileges. You can post announcements and manage content.
+                    {% else %}
+                    Welcome to your dashboard. Here you can view all announcements from administrators.
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+
+        <!-- Announcements Section -->
+        <h3 class="mb-3">All Announcements</h3>
+        {% if announcements %}
+            {% for announcement in announcements %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ announcement.title }}</h5>
+                    <p class="card-text">{{ announcement.content }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">Posted by: {{ announcement.author.username }}</small>
+                        <small class="text-muted">{{ announcement.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info">
+                <p class="mb-0">No announcements have been posted yet.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

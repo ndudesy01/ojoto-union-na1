@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Post Announcement - Ojoto Union NA1{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Post New Announcement</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Announcement Title</label>
+                        <input type="text" class="form-control" id="title" name="title" required 
+                               placeholder="Enter a clear and concise title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Announcement Content</label>
+                        <textarea class="form-control" id="content" name="content" rows="6" required
+                                  placeholder="Write your announcement details here..."></textarea>
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary me-md-2">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Post Announcement</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
